@@ -17,8 +17,9 @@ data "vsphere_virtual_machine" "template" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-data "vsphere_network" "network" {
-  name          = var.vm_network
+data "vsphere_network" "networks" {
+  count         = length(local.vms_networks)
+  name          = local.vms_networks[count.index]
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
@@ -41,7 +42,7 @@ resource "vsphere_virtual_machine" "vms" {
   scsi_type = data.vsphere_virtual_machine.template.scsi_type
 
   network_interface {
-    network_id   = data.vsphere_network.network.id
+    network_id   = local.vm_networks[trimspace(var.virtual_machines[count.index].network)]
     adapter_type = data.vsphere_virtual_machine.template.network_interface_types[0]
   }
 
@@ -69,8 +70,12 @@ resource "vsphere_virtual_machine" "vms" {
         domain_admin_user     = lookup(var.virtual_machines[count.index], "domain_admin_user", null)
         domain_admin_password = lookup(var.virtual_machines[count.index], "domain_admin_password", null)
 
-        auto_logon            = true
-        run_once_command_list = ["shutdown /r /t 0"]
+        //Extend the C Drive when you create a system disk bigger than the template's
+        auto_logon = true
+        run_once_command_list = [
+          "Powershell Resize-Partition -DriveLetter c -Size (Get-PartitionSupportedSize -DriveLetter c).sizeMax",
+          "shutdown /r /t 0"
+        ]
       }
 
       dynamic "network_interface" {
@@ -88,4 +93,15 @@ resource "vsphere_virtual_machine" "vms" {
     }
 
   }
+}
+
+locals {
+  vms_networks = distinct(var.virtual_machines.*.network)
+}
+
+locals {
+  vm_networks = zipmap(
+    formatlist("${trimspace("%s")}", data.vsphere_network.networks.*.name),
+    data.vsphere_network.networks.*.id
+  )
 }

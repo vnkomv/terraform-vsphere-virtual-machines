@@ -16,9 +16,7 @@ module "servers" {
   vsphere_datastore  = var.vsphere_datastore
   vsphere_cluster    = var.vsphere_cluster
   vm_template        = var.vm_template
-  vm_network         = var.vm_network
   virtual_machines   = var.virtual_machines
-  vms_defaults       = var.vms_defaults
 
   providers = {
     vsphere = "vsphere"
