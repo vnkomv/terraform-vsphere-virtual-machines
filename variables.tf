@@ -10,11 +10,11 @@ variable "vsphere_datastore" {
   description = "The datastore where the virtual machines will be put."
 }
 
+variable "vm_template" {
+  description = "The template the virtual machines should be based on."
+}
+
 variable "virtual_machines" {
   type        = list(any)
   description = "The list of virtual machines you wish to create."
-}
-
-variable "vm_template" {
-  description = "The template the virtual machines should be based on."
 }

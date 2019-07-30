@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Simplify the module structure.
 - Make some changelog entry more readable.
+- Make Readme more useful
 
 ### Remove
 
