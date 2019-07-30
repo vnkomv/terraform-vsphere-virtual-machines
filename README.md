@@ -18,7 +18,7 @@ Example:
 provider "vsphere" {
   user                 = "vsphere\\Administrator"
   password             = "Secret"
-  vsphere_server       = vsphere.exemple.com
+  vsphere_server       = "vsphere.exemple.com"
   allow_unverified_ssl = true
 }
 
