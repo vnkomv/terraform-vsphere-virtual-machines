@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3] - 2019-07-30
+
+### Modified
+
+- Simplify the module structure.
+- Make some changelog entry more readable.
+
+### Remove
+
+- Clunky and unecessary files.
+
 ## [0.0.2] - 2019-07-07
 
 ### Added
@@ -27,4 +38,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- First version of the project
+- First version
