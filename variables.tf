@@ -16,5 +16,5 @@ variable "vm_template" {
 
 variable "virtual_machines" {
   type        = list(any)
-  description = "The list of virtual machines you wish to create."
+  description = "The parameters of the virtual machines you wish to create."
 }

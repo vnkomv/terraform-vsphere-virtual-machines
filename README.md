@@ -18,14 +18,14 @@ Example:
 provider "vsphere" {
   user                 = "vsphere\\Administrator"
   password             = "Secret"
-  vsphere_server       = vsphere.exemple.com
+  vsphere_server       = "vsphere.exemple.com"
   allow_unverified_ssl = true
 }
 
 
 module "servers" {
   source  = "vnkomv/virtual-machines/vsphere"
-  version = "0.0.3"
+  version = "0.0.4"
 
   vsphere_datacenter = "DC-01"
   vsphere_datastore  = "DSTORE-01"
